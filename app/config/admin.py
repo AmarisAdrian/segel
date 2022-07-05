@@ -9,7 +9,7 @@ class DepartamentoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     search_fields = ['nombre']
 
 class CiudadAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id','nombre']
+    list_display = ['id','nombre','is_active']
     search_fields = ['nombre']
 
 class ConfiguracionAdmin(ImportExportModelAdmin, admin.ModelAdmin):
@@ -20,15 +20,7 @@ class LogAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['id','modulo', 'request','excepcion','fecha_ingreso']
     search_fields = ['modulo']
 
-class EstadoUsuarioAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['nombre']
-    search_fields = ['nombre']
-
 class GeneroAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['nombre']
-    search_fields = ['nombre']
-
-class TipoUsuarioAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ['nombre']
     search_fields = ['nombre']
 
@@ -40,7 +32,5 @@ admin.site.register(DepartamentoModel,DepartamentoAdmin)
 admin.site.register(CiudadModel,CiudadAdmin)
 admin.site.register(ConfiguracionModel,ConfiguracionAdmin)
 admin.site.register(LogModel,LogAdmin)
-admin.site.register(EstadoUsuarioModel,EstadoUsuarioAdmin)
 admin.site.register(GeneroModel,GeneroAdmin)
-admin.site.register(TipoUsuarioModel,TipoUsuarioAdmin)
 admin.site.register(TipoDocumentoModel,TipoDocumentoAdmin)

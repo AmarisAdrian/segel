@@ -8,6 +8,8 @@ class ZonaVotacionModel(models.Model):
     numero = models.IntegerField(unique=True,db_column='numero',blank=True, null=True)
     codigo = models.CharField(max_length=45,db_column='codigo', blank=True, null=True)
     nombre = models.CharField(max_length=20,db_column='nombre', blank=True, null=True)
+    is_active=models.BooleanField(default=False)
+    fecha_ingreso = models.DateTimeField(db_column='fecha_ingreso', auto_now_add=True,blank=True, null=True)
     
     def __str__(self):
         return self.divipol

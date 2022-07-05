@@ -11,10 +11,11 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-
+import sweetify
+from pathlib import Path
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -42,12 +43,14 @@ INSTALLED_APPS = [
     'app.campana',
     'app.config',
     'app.divipol',
+    'app.index',
     'app.puesto_votacion',
     'app.registro_votante',
     'app.usuario',
-    'app.votante',
     'app.zona_votacion',
     'import_export', 
+    'sweetify',
+
 ]
 
 MIDDLEWARE = [
@@ -88,10 +91,10 @@ DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
           'NAME': 'segel',
-          'USER': os.environ['POSTGRESQL_USER'],
-          'PASSWORD': os.environ['POSTGRESQL_PASSWORD'],
-          'HOST':  os.environ['POSTGRESQL_HOST'],
-          'PORT': os.environ['POSTGRESQL_PORT'],
+          'USER': 'postgres',
+          'PASSWORD': 'root',
+          'HOST': '127.0.0.1',
+          'PORT':'5432'
     }
 }
 
@@ -162,10 +165,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT =   os.path.join(BASE_DIR, 'static/')
-PDF_ROOT = STATIC_ROOT + "pdf/"
-LOGIN_URL = '/perfil/login/'
-LOGIN_REDIRECT_URL = '/index/'
+STATICFILES_DIRS =   [os.path.join(BASE_DIR, 'static/')]
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 AUTH_USER_MODEL = 'usuario.User'

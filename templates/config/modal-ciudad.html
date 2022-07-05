@@ -1,0 +1,52 @@
+{% block modal_ciudad %}
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+            
+                {% if dato %}
+                <div class="card-body">
+                    <form class="FrmUpdateCiudad form-horizontal" id="FrmUpdateCiudad" name="FrmUpdateCiudad"      method="POST" action="{% url 'config:editar-ciudad' dato.datos.id %}" role="form">
+                       {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id" class="col-lg-3 control-label">Id *</label>
+                            <div class="col-md-12">
+                                <input type="text" name="id" value="{{ dato.datos.id }}" class="form-control" id="id" placeholder="Id" readonly="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre" class="col-lg-3 control-label">Departamento *</label>
+                            <div class="col-md-12">
+                               {{ dato.datos.form.departamento }}                
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre" class="col-lg-3 control-label">Nombre *</label>
+                            <div class="col-md-12">
+                                <input type="text" name="nombre" value=" {{ dato.datos.nombre }}" class="form-control" id="nombre" placeholder="nombre">
+                        </div>
+                        <br />
+                         <div class="form-check">                
+                            {{ dato.datos.form.is_active }}
+                            <label class="form-check-label " for="is_Active"> Activo </label>                      
+                        </div>
+                        {% if form.errors %}
+                            <div class="alert alert-danger">
+                                {{ form.errors }}
+                            </div>
+                        {% endif %}  
+                        <br /><br /> 
+                       <div class="category">* Campo Requerido</div>
+                        <div class="card-footer border-white bg-white text-center">
+                            <button type="submit"  class="btn btn-primary btn-fill btn-wd">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+                {% else %}
+                    <div class="alert alert-danger">
+                        <span>
+                            <b>No hay departamentos registrados</b>
+                        </span>
+                    </div>
+                 {% endif %}
+            </div>
+        </div>
+{% endblock %}
