@@ -1,0 +1,290 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+  {% block title %}SEGEL - logistica electoral{% endblock %} 
+  </title>
+  {% block extrastatic %}
+  <meta name="description" content="SEGEL LOGISTICA ELECTORAL">
+  <meta name="author" content="Startup">
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex">
+  <meta name="googlebot" content="noindex">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{% static 'img/icon/apple-icon-60x60.png' %}" />
+  <link rel="manifest" href="{% static 'img/icon/manifest.json' %}">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="{% static  'img/icon/ms-icon-144x144.png' %}">
+  <link rel="icon" type="image/png" href="{% static 'img/icon/apple-icon-57x57.png' %}"/>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet"  href="{% static 'css/bootstrap.min.css'  %}" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static  'css/style.css' %}"/>
+  <link rel="stylesheet" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/datatables.min.css"/>
+  <!-- BEGIN CSS for this page -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"/>                                                
+  <script src="https://kit.fontawesome.com/16d736b7fa.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+  {% endblock %}
+  <!-- END CSS for this page -->
+</head>
+<body class="adminbody" id="adminbody">
+ <div class="main" id="main">
+    <!-- top bar navigation -->
+    <div class="headerbar">
+      <!-- LOGO -->
+      <div class="headerbar-left">
+        <a href="{% url 'index:index' %}" class="logo"><img alt="Logo" src="{% static 'img/icon/apple-icon-76x76.png' %}"/> <span><b>SEGEL</b></span></a>
+      </div>
+      <nav class="navbar-custom">
+        <ul class="list-inline float-right mb-0">
+          <li class="list-inline-item dropdown notif">
+            <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" role="button" aria-haspopup="false" aria-expanded="false">
+              <img src="{% static  'img/admin.png' %}" alt="Profile image" class="avatar-rounded">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+              <!-- item-->
+              <div class="dropdown-item noti-title">
+                <h5 class="text-overflow"><small>Hola </small> </h5>
+              </div>
+              <!-- item-->
+              <a href="?view=profile" method="POST"  class="dropdown-item notify-item">
+                <i class="fa fa-user"></i> <span>Perfil</span>
+              </a>
+              <!-- item-->
+              <a href="#" class="dropdown-item notify-item">
+                <i class="fa fa-power-off"></i> <span>Cerrar sesión</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+        <ul class="list-inline menu-left mb-0">
+          <li class="float-left">
+            <button class="button-menu-mobile open-left">
+              <i class="fa fa-fw fa-bars"></i>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <!-- End Navigation -->
+    <!-- Left Sidebar -->
+    <div class="left main-sidebar">
+      <div class="sidebar-inner leftscroll">
+        <div id="sidebar-menu">
+          <ul>
+            <li class="submenu">
+              <a class="active" href="{% url 'index:index' %}"><i class="fa fa-fw fa-bars"></i><span> Dashboard </span> </a>
+            </li>
+            <li class="submenu">
+              <a href="#"><i class="fa fa-fw far fa-address-card"></i> <span>Inscripciones</span><span class="menu-arrow"></span> </a>
+              <ul class="list-unstyled">
+              <li><a href="#">Consultar votante</a></li>
+                <li><a href="#">Registrar sufragante</a></li>
+                <li><a href="#">Lista de inscripciones</a></li>
+              </ul>
+            </li>
+            <li class="submenu">
+              <a href="#"><i class="fas fa-database"></i><span> Registros de votos</span> <span class="menu-arrow"></span></a>
+              <ul class="list-unstyled">
+                <li><a href="#">Vista de votos</a></li>
+                <li><a href="#">Estadisticas</a></li>
+              </ul>
+            </li>
+            <li class="submenu">
+              <a href="#"><i class="fas fa-map-marked"></i> <span>Divipol</span> <span class="menu-arrow"></span></a>
+              <ul class="list-unstyled">
+                <li><a href="#">Divipol</a></li>          
+                <li><a href="#"</a></li>
+                <li><a href="#">Gestión puestos de votación</a></li> 
+                <li><a href="#">Listado puestos de votación </a></li> 
+              </ul>
+            </li>
+            <li class="submenu">
+              <a href="#"><i class="fas fa-paperclip"></i> <span>Anexos</span> <span class="menu-arrow"></span></a>
+              <ul class="list-unstyled">
+                <li><a href="#">Anexos usuarios</a></li>
+                <li><a href="#">Anexos votantes</a></li>
+              </ul>
+            </li>
+            <li class="submenu">
+              <a href="#"><i class="fa fa-fw fa-th"></i> <span> Logistica </span> <span class="menu-arrow"></span></a>
+              <ul class="list-unstyled">
+                <li><a href="#">Star Rating</a></li>
+              </ul>
+            </li>
+            <li class="submenu">
+              <a href="#"><i class="fas fa-check"></i> <span>Pendientes</span> <span class="menu-arrow"></span></a>
+              <ul class="list-unstyled">
+                <li><a href="#">Aprobaciones </a></li>
+              </ul>
+            </li>
+          <li class="submenu">
+              <a href="#"><i class="fa fa-fw fas fa-cog"></i> <span>Configuracion</span> <span class="menu-arrow"></span></a>
+              <ul class="list-unstyled">
+                <li><a href="{% url 'config:ciudad' %}">Ciudades </a></li>
+                <li><a href="#">Departamentos</a></li>
+              </ul>
+            </li>
+        </div>
+      </div>
+    </div>
+    <!-- End Sidebar -->
+    <div class="content-page bg-light">
+      <!-- Start content -->
+      <div class="content">   
+      <div class="push">
+        {% block content %}
+          <section>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-xl-12">
+                    <div class="breadcrumb-holder">
+                      <h1 class="main-title float-left">Dashboard</h1>
+                      <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item">Home</li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                      </ol>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+                </div>
+                <!-- end row -->
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                    <div class="card-box noradius noborder bg-info">
+                      <i class="fa fa-id-card-o float-right text-white"></i>
+                      <h6 class="text-white text-uppercase m-b-20">Registros</h6>
+                      <h1 id="NumTotalRegistro" class="m-b-20 text-white counter ">{{ votante_count }} </h1>
+                      <span class="text-white">Total </span>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                    <div class="card-box noradius noborder bg-success">
+                      <i class="fa fa-map float-right text-white" aria-hidden="true"></i>
+                      <h6 class="text-white text-uppercase m-b-20 ">Puestos </h6>
+                      <h1 id="NumTotalVotante" class="m-b-20 text-white counter"> {{ puesto_count }}</h1>
+                      <span class="text-white">Total</span>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                    <div class="card-box noradius noborder bg-warning">
+                      <i class="fas fa-users float-right text-white"></i>
+                      <h6 class="text-white text-uppercase m-b-20">Lideres</h6>
+                      <h1 id="NumTotalLider" class="m-b-20 text-white counter">{{ lider_count }}</h1>
+                      <span class="text-white">Total</span>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                    <div class="card-box noradius noborder bg-danger">
+                      <i class="fas fa-paperclip float-right text-white"></i>
+                      <h6 class="text-white text-uppercase m-b-20">Anexos </h6>
+                      <h1 id="NumTotalAnexo" class="m-b-20 text-white counter"> {{ anexo_count }} </h1>
+                      <span class="text-white">Total</span>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- end row -->
+
+
+
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="card mb-3">
+                      <div class="card-header">
+                        <h3><i class="fa fa-bar-chart-o"></i> Top lideres</h3>
+                        Listado generales de lideres con mas inscripciones realizadas
+                      </div>
+                      <div class="card-body">
+
+                        <div class="table-responsive">
+                          <table id="tablatoplider" class="table table-striped ">
+                            <thead class="bg-primary text-white">
+                              <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Cantidad</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="card-footer small text-muted">Actualizado</div>
+                    </div><!-- end card-->
+                  </div>
+                </div>
+                <!-- end row -->
+              </div>
+            </section>
+
+
+        {% endblock %}
+      </div>
+
+      </div>
+      <!-- END content -->
+      </div>
+    <!-- END content-page -->
+    <footer class="footer">
+      <span class="text-right">
+        Copyright <a target="_blank" href="#">SEGEL</a>
+      </span>
+      <span class="float-right">
+        Powered with <a target="_blank" href="#"><b><i class="fa-solid fa-heart"></i><i class="fa fa-hand-peace-o" aria-hidden="true"></i></b></a>
+      </span>
+    </footer>
+   </div>
+</div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js" integrity="sha256-JG6hsuMjFnQ2spWq0UiaDRJBaarzhFbUxiUTxQDA9Lk=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js" integrity="sha256-XF29CBwU1MWLaGEnsELogU6Y6rcc5nCkhhx89nFMIDQ=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js" integrity="sha256-J2sc79NPV/osLcIpzL3K8uJyAD7T5gaEFKlLDM18oxY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js" integrity="sha256-CfcERD4Ov4+lKbWbYqXD6aFM9M51gN4GUEtDhkWABMo=" crossorigin="anonymous"></script>    
+  <script src="{% static 'js/ajax.js' %} "></script>
+  <script src="{% static 'js/sweetalert2.min.js' %} "></script>
+  <script src="{% static 'js/jquery.min.js' %} "></script>
+  <script src="{% static 'js/modernizr.min.js' %} "></script>
+  <script src="{% static 'js/moment.min.js' %} "></script>
+  <script src="{% static 'js/modal.js' %} "></script>
+  <script src="{% static 'js/select.dinamico.js'%} "></script>
+  <script src="{% static 'js/popper.min.js'%} "></script>
+  <script src="{% static 'js/bootstrap.min.js'%} "></script>
+  <script src="{% static 'js/detect.js' %} "></script>
+  <script src="{% static 'js/fastclick.js' %} "></script>
+  <script src="{% static 'js/jquery.blockUI.js' %} "></script>
+  <script src="{% static 'js/jquery.nicescroll.js' %} "></script>
+  <script src="{% static 'js/action.js' %} "></script>
+  <script src="{% static 'js/datatable.js' %} "></script>
+  <!-- App js -->
+  <script src="{% static 'js/pikeadmin.js' %}"></script>
+  <!-- BEGIN Java Script for this page -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/datatables.min.js"></script>
+  <!-- Counter-Up-->
+  <script src="{% static 'js/jquery.waypoints.min.js' %} "></script>
+  <script src="{% static  'js/jquery.counterup.min.js' %}  "></script>
+  
+</body>
+</html>

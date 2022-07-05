@@ -1,7 +1,14 @@
 from django.db import models
 
 class DepartamentoModel(models.Model):
+    id = models.AutoField(db_column='id', primary_key=True)
     nombre = models.CharField(max_length=150,db_column='nombre',blank=False, null=False)
+    is_active=models.BooleanField(default=False)
+    fecha_ingreso = models.DateTimeField(db_column='fecha_ingreso', auto_now_add=True,blank=True, null=True)
+
+    def __str__(self):
+        return self.nombre
+
     class Meta:
         managed = True
         db_table = 'departamento'
@@ -9,8 +16,20 @@ class DepartamentoModel(models.Model):
         verbose_name_plural= 'Departamentos' 
 
 class CiudadModel(models.Model):
+    id = models.AutoField(db_column='id', primary_key=True)
     nombre = models.CharField(max_length=150,db_column='nombre',blank=False, null=False)
     departamento = models.ForeignKey(DepartamentoModel, models.DO_NOTHING, db_column='departamento')
+    is_active=models.BooleanField(default=True)
+    fecha_ingreso = models.DateTimeField(db_column='fecha_ingreso', auto_now_add=True,blank=True, null=True)
+
+    def __str__(self):
+        return self.departamento
+   
+    def get_estado(self):
+        if self.is_active:
+            return "Activo"
+        else:
+            return "Inactivo"
 
     class Meta:
         managed = True
@@ -19,10 +38,12 @@ class CiudadModel(models.Model):
         verbose_name_plural= 'ciudades' 
 
 class ConfiguracionModel(models.Model):
+    id = models.AutoField(db_column='id', primary_key=True)
     nombre = models.CharField(max_length=255,db_column='nombre',blank=False, null=False)
     manejador = models.CharField(max_length=50,db_column='manejador',blank=False, null=False)
     valor = models.CharField(max_length=255,db_column='valor',blank=False, null=False)
-
+    is_active=models.BooleanField(default=False)
+    fecha_ingreso = models.DateTimeField(db_column='fecha_ingreso', auto_now_add=True,blank=True, null=True)
     class Meta:
         managed = True
         db_table = 'configuracion'
@@ -43,18 +64,10 @@ class LogModel(models.Model):
         verbose_name="log"
         verbose_name_plural= 'logs' 
 
-class EstadoUsuarioModel(models.Model):
-    nombre = models.CharField(max_length=255, null= False,blank=False)
-
-    class Meta:
-        managed = True
-        db_table = 'estado_usuario'
-        verbose_name="estado usuario"
-        verbose_name_plural= 'estado usuarios' 
-
-
 class GeneroModel(models.Model):
+    id = models.AutoField(db_column='id', primary_key=True)
     nombre = models.CharField(max_length=15, blank=False, null=False)
+    is_active=models.BooleanField(default=False)
 
     class Meta:
         managed = True
@@ -63,19 +76,11 @@ class GeneroModel(models.Model):
         verbose_name_plural= 'generos' 
 
 class TipoDocumentoModel(models.Model):
+    id = models.AutoField(db_column='id', primary_key=True)
     nombre = models.CharField(max_length=30, blank=False, null=False)
-
+    is_active=models.BooleanField(default=False)
     class Meta:
         managed = True
         db_table = 'tipo_documento'
         verbose_name="Tipo de documentos"
         verbose_name_plural= 'Tipo documentos' 
-
-class TipoUsuarioModel(models.Model):
-    nombre = models.CharField(max_length=30, blank=False, null=False)
-
-    class Meta:
-        managed = True
-        db_table = 'tipo_usuario'
-        verbose_name="Tipo usuario"
-        verbose_name_plural= 'Tipo usuarios' 
