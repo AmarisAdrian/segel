@@ -39,8 +39,6 @@ $(document).ready(function (mensaje) {
       });  
       tabledepartamento.buttons( 0, null ).containers().appendTo('#MenuHerramientaDepartamento');
 
-    $('#tablamensajerecibido').DataTable();
-    $('#tablamensajeenviado').DataTable();
      $('#tablatoplider').DataTable({
         "order": [[ 0, "desc" ]],
         "destroy": true,
@@ -129,7 +127,8 @@ $(document).ready(function (mensaje) {
       });  
       tableinscripcion.buttons( 0, null ).containers().appendTo( '#MenuHerramientaInscripcion' );
 
-  var tablaestadisticas = $('#tablaestadisticas').DataTable({
+
+  var tabla_log = $('#tablalog').DataTable({
     extend: 'collection',
     buttons: [
       'csv',
@@ -146,7 +145,7 @@ $(document).ready(function (mensaje) {
 
     ],
   });
-  tablaestadisticas.buttons(0, null).containers().appendTo('#MenuHerramientaEstadisticas');
+  tabla_log.buttons(0, null).containers().appendTo('#MenuHerramientaLog');
     // counter-up
     $('.counter').counterUp({
       delay: 10,

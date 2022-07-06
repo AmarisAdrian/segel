@@ -19,3 +19,19 @@ class CiudadForm(forms.ModelForm):
                         'nombre':forms.TextInput(attrs={'class': 'form-control border border-2'}),
                         'is_active': forms.CheckboxInput(attrs={})
                 }
+
+class DepartamentoForm(forms.ModelForm):
+        class Meta:
+                model = DepartamentoModel
+                fields = [
+                        'nombre',    
+                        'is_active'     
+                ]
+                labels = {
+                        'nombre':'* Nombre',       
+                        'is_active':'Activo'    
+                }
+                widgets = {   
+                        'nombre':forms.TextInput(attrs={'class': 'form-control border border-2'}),
+                        'is_active': forms.CheckboxInput(attrs={})
+                }

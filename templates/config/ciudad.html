@@ -18,8 +18,8 @@
         </div>
     </div>
     <div class="row">
-        {% load sweetify %} {% sweetify %}
         <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12">
+                   {% load sweetify %} {% sweetify %}
             <div class="card">
                     <div class="card-header">
                     <h3>
@@ -41,7 +41,7 @@
                           <!--Aqui va la tabla-->
                           <table id="tablaciudad" class="table table-striped ">
                          
-                                <thead class="bg-primary text-white">
+                                <thead class="bg-primary-custom text-white">
                                     <tr>
                                     <th>Id</th>
                                     <th>Departamento</th>
@@ -58,9 +58,10 @@
                                         <td>{{ ciudad.nombre }}</td>
                                         <td>{{ ciudad.get_estado }}</td>
                                         <td style="width:100px;">
-                                            <a href="#" data-target="#modal_ciudad" data-id="#"
-                                                data-toggle="modal"  data-url="{% url 'config:consultar-ciudad' ciudad.id %}" data-id="{{ ciudad.id }} "   class="modal_ciudad btn btn-success btn-circle btn-sm" title="Ver"
-                                                data-placement="top" > <i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            <a href="#" data-target="#modal_ciudad"  data-toggle="modal"  data-url="{% url 'config:consultar-ciudad' ciudad.id %}" 
+                                                data-id="{{ ciudad.id }} "   class="modal_ciudad btn btn-success btn-circle btn-sm" title="Editar" data-placement="top" >
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
                                         </td>                               
                                     </tr>
                                 {% endfor %}
@@ -90,7 +91,14 @@
                 <div class="card-body">
                     <form class="FrmAddCiudad form-horizontal" id="FrmAddCiudad" name="FrmAddCiudad" data-url="{% url 'config:crear-ciudad' %}" method="POST" action="#" role="form">
                        {% csrf_token %}
-                            {{ form_class }}
+                         <div class="form-group">
+                            {{ form_class.departamento.label}}
+                             {{ form_class.departamento}}
+                         </div>
+                        <div class="form-group">
+                            {{ form_class.nombre.label}}
+                             {{ form_class.nombre}}
+                         </div>
                         {% if form.errors %}
                             <div class="alert alert-danger">
                                 {{ form.errors }}
@@ -98,7 +106,7 @@
                         {% endif %}   
                             <div class="category">* Campo Requerido</div>
                         <div class="card-footer border-white bg-white text-center">
-                            <button type="submit"  class="btn btn-primary btn-fill btn-wd">Guardar</button>
+                            <button type="submit"  class="btn bg-primary-custom text-white btn-fill btn-wd">Guardar</button>
                         </div>
                     </form>
                 </div>
@@ -119,7 +127,7 @@
  <div id="modal_ciudad" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
-            <div class="modal-header bg-primary">
+            <div class="modal-header bg-primary-custom ">
               <h5 class="modal-title text-light"><i class="fas fa-city" aria-hidden="true"></i></a>  Datos ciudad</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
