@@ -1,0 +1,125 @@
+{% extends 'layout/index.html' %}
+{% block title %} SEGEL - departamentos {% endblock %}
+{% block content %}
+<section>
+<div class="container-fluid">
+<div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="breadcrumb-holder">
+                <h1 class="main-title float-left">Departamentos</h1>
+                <ol class="breadcrumb float-right">
+                    <li class="breadcrumb-item"><a href="{% url 'index:index' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Configuración</li>
+                    <li class="breadcrumb-item active">Departamentos</li>
+                </ol>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12">
+            {% load sweetify %} {% sweetify %}
+            <div class="card">
+                    <div class="card-header">
+                        <h3>
+                            <div class="dropdown">
+                                    <i class="fa fa-list"></i> Lista de departamentos registrados
+                              <button class="btn btn-info dropdown-toggle" type="button" id="MenuHerramienta"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Exportar
+                                </button> 
+                                <div class="dropdown-menu" id="MenuHerramientaDepartamento" aria-labelledby="MenuHerramientaDepartamento">
+                                </div>
+                            </div>
+                        </h3>
+                    </div>
+                  <hr/>
+                <div class="card-body">
+                    <div class="table-responsive">
+                    {% if departamento %}
+                        <table id="tabladepartamento" class="table table-striped">
+                            <thead class="bg-primary-custom text-white">
+                                <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Estado</th>
+                                <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for departamento in departamento %}
+                                <tr>
+                                    <td>{{ departamento.id }}</td>
+                                    <td>{{ departamento.nombre }}</td>
+                                    <td>{{ departamento.get_estado }}</td>
+                                    <td style="width:100px;">
+                                        <a href="#" data-target="#modal_departamento"  data-url="{% url 'config:consultar-departamento' departamento.id %}"   data-id="{{ ciudad.id }} " 
+                                            data-toggle="modal" class="modal_departamento btn btn-success btn-circle btn-sm" title="Editar"
+                                            data-placement="top"> <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </a>                  
+                                    </td>                                  
+                                </tr>
+                                    {% endfor %}
+                            </tbody>                            
+                        </table>
+                        <!--FIN DE TABLA-->
+                        {% else %}
+                            <div class="alert alert-danger">
+                                <span>
+                                    <b>No hay ciudades registradas</b>
+                                </span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-header">
+                        <h3><i class="fas fa-flag"></i> Registrar departamento </h3>
+                     </div>
+                    <div class="card-body">
+                        <form id="FrmAddDepartamento" name="FrmAddDepartamento" method="POST" action="{% url 'config:crear-departamento' %}" role="form">
+                            {% csrf_token %}
+                        <div class="form-group">
+                            {{ form_class.nombre.label}}
+                             {{ form_class.nombre}}
+                          </div>
+                            {% if form.errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.errors }}
+                                </div>
+                            {% endif %} 
+                            <div class="category">* Campo Requerido</div>               
+                            <div class="card-footer bg-white border-white text-center">
+                                <button type="submit" class="btn bg-primary-custom text-white btn-fill btn-wd">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--VENTANA MODAL DE DEPÁRTAMENTOS-->
+    {% block modal_departamento %}
+    <div id="modal_departamento" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                <div class="modal-header bg-primary-custom">
+                    <h5 class="modal-title text-light"><i class="fas fa-flag" aria-hidden="true"></i></a> Datos departamento</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                </div>
+            </div>
+         </div>
+    </div>
+    {% endblock %}
+</section>
+{% endblock %}

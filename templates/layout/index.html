@@ -128,8 +128,9 @@
           <li class="submenu">
               <a href="#"><i class="fa fa-fw fas fa-cog"></i> <span>Configuracion</span> <span class="menu-arrow"></span></a>
               <ul class="list-unstyled">
-                <li><a href="{% url 'config:ciudad' %}">Ciudades </a></li>
-                <li><a href="#">Departamentos</a></li>
+                <li><a href="{% url 'config:ciudad' %}"><i class="fa fa-building-o"></i> Ciudades </a></li>
+                <li><a href="{% url 'config:departamento' %}"><i class="fa fa-map-signs"></i>  Departamentos</a></li>
+                <li><a href="{% url 'config:log' %}"><i class="fa fa-fw fas fa-list"></i>  Logs</a></li>
               </ul>
             </li>
         </div>
@@ -208,7 +209,7 @@
 
                         <div class="table-responsive">
                           <table id="tablatoplider" class="table table-striped ">
-                            <thead class="bg-primary text-white">
+                            <thead class="bg-primary-custom text-white">
                               <tr>
                                 <th>Id</th>
                                 <th>Nombre</th>

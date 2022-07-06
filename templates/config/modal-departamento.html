@@ -1,27 +1,21 @@
-{% block modal_ciudad %}
+{% block modal_departamento %}
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
             <div class="card">
             
                 {% if datos %}
                 <div class="card-body">
-                    <form class="FrmUpdateCiudad form-horizontal" id="FrmUpdateCiudad" name="FrmUpdateCiudad"   method="POST" action="{% url 'config:editar-ciudad' datos.id %}" role="form">
+                    <form class="FrmUpdateDepartamento form-horizontal" id="FrmUpdateDepartamento" name="FrmUpdateDepartamento"   method="POST" action="{% url 'config:editar-departamento' datos.id %}" role="form">
                        {% csrf_token %}
                         <div class="form-group">
                             <label for="id" class="col-lg-3 control-label">Id *</label>
                             <div class="col-md-12">
-                                <input type="text" name="id" value="{{ datos.id }}" class="form-control" id="id" placeholder="Id" readonly="true">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="nombre" class="col-lg-3 control-label">Departamento *</label>
-                            <div class="col-md-12">
-                               {{ datos.form.departamento }}                
+                                <input type="text" value="{{ datos.id }}" class="form-control" name="id" id="id" readonly="true">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="nombre" class="col-lg-3 control-label">Nombre *</label>
                             <div class="col-md-12">
-                                <input type="text" name="nombre" value=" {{ datos.nombre }}" class="form-control" id="nombre" placeholder="nombre">
+                                <input type="text" value=" {{ datos.nombre }}" class="form-control" name="nombre" id="nombre" placeholder="nombre">
                         </div>
                         <br />
                          <div class="form-check">                

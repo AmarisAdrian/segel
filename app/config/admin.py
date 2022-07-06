@@ -5,7 +5,7 @@ from app.config.models import *
 from import_export.admin import ImportExportModelAdmin
 
 class DepartamentoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ['id','nombre']
+    list_display = ['id','nombre','is_active']
     search_fields = ['nombre']
 
 class CiudadAdmin(ImportExportModelAdmin, admin.ModelAdmin):

@@ -3,12 +3,17 @@ from django.db import models
 class DepartamentoModel(models.Model):
     id = models.AutoField(db_column='id', primary_key=True)
     nombre = models.CharField(max_length=150,db_column='nombre',blank=False, null=False)
-    is_active=models.BooleanField(default=False)
+    is_active=models.BooleanField(default=True,blank=True, null=True)
     fecha_ingreso = models.DateTimeField(db_column='fecha_ingreso', auto_now_add=True,blank=True, null=True)
 
     def __str__(self):
         return self.nombre
 
+    def get_estado(self):
+        if self.is_active:
+            return "Activo"
+        else:
+            return "Inactivo"
     class Meta:
         managed = True
         db_table = 'departamento'
