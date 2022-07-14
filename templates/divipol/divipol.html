@@ -1,0 +1,151 @@
+{% extends 'layout/index.html' %}
+{% block title %} SEGEL - ciudades {% endblock %}
+{% block content %}
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12">
+                <div class="breadcrumb-holder">
+                    <h1 class="main-title float-left">División politica</h1>
+                    <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item"><a href="{% url 'index:index' %}">Home</a></li>
+                        <li class="breadcrumb-item active">Divipol</li>
+                        <li class="breadcrumb-item active">Divipol</li>
+                    </ol>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-header text-light bg-primary-custom">
+                            <h3><i class="fas fa-globe"></i> Registrar divipol </h3>
+                        </div>
+                         {% if departamento and ciudad %}
+                            <div class="card-body bg-muted">
+                                <form id="addivipol" method="POST" action="index.php?view=addivipol">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {{ form_class.departamento.label }}
+                                                {{ form_class.departamento }}
+                                            </div>
+                                            <div class="form-group">
+                                                {{ form_class.ciudad.label }}
+                                                {{ form_class.ciudad }}
+                                            </div>
+                                            <div class="form-group">
+                                                {{ form_class.nombre.label }}
+                                                {{ form_class.nombre }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {{ form_class.referencia.label }}
+                                                {{ form_class.referencia }}
+                                            </div>
+                                            <div class="form-group">
+                                                {{ form_class.comentario.label }}
+                                                {{ form_class.comentario }}
+                                            </div>
+                                            <div class="category"> * Campo Requerido</div>
+                                            <div class="card-footer border-white bg-white text-right">
+                                                <button type="submit" class="btn bg-primary-custom text-white btn-fill btn-wd">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>               
+                    </div>   
+                      {% else %} 
+                    <div class="alert alert-danger">
+                        <span>
+                            <b>No hay ciudad o departamento registrado</b>
+                        
+                        </span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <br />
+        <!--TABLA DE DIVIPOL-->
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>
+                            <div class="dropdown">
+                                <i class="fa fa-list"></i> Lista de las divisiones politicas registradas
+                                <button class="btn btn-info dropdown-toggle" type="button" id="MenuHerramienta" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Exportar
+                                </button>
+                                <div class="dropdown-menu" id="MenuHerramientaDivipol" aria-labelledby="MenuHerramienta">
+
+                                </div>
+                            </div>
+                        </h3>
+                    </div>
+                      {% if divipol %}
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="tabladivipol" class="table table-striped ">
+                                    <thead class="bg-primary-custom text-white">
+                                        <tr>
+                                            <th>Departamento</th>
+                                            <th>Ciudad</th>
+                                            <th>Nombre</th>
+                                            <th>referencia</th>
+                                            <th>comentario</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                             <tr>
+                                                <td>{{ divipol.departamento}}</td>
+                                                <td>{{ divipol.ciudad}}</td>
+                                                <td>{{ divipol.nombre}}</td>
+                                                <td>{{ divipol.referencia}}</td>
+                                                <td>{{ divipol.comentario}}</td>
+                                                <td style="width:100px;">
+                                                    <a href="#" data-target="#modal_divipol" data-id="{{ divipol.id }}" data-toggle="modal" class="btn btn-success btn-circle btn-sm" title="Editar" data-placement="top"> <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                </td>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-danger">
+                            <span>
+                                <b>No hay divipol registradas</b>
+                            </span>
+                        </div>
+                          {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--VENTANA MODAL DE DIVIPOL-->
+    <div id="modal_divipol" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary-custom">
+                    <h5 class="modal-title text-light"><i class="fas fa-globe"></i> Datos divipol</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</section>
+{% endblock %}

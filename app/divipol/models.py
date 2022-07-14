@@ -11,10 +11,18 @@ class DivipolModel(models.Model):
     comentario = models.CharField(max_length=60, blank=True, null=True)
     fecha_ingreso = models.DateTimeField(db_column='fecha_ingreso', auto_now_add=True,blank=True, null=True)
     is_active=models.BooleanField(default=False)
+
     def __str__(self):
         return self.departamento 
+        
     def __str__(self):
         return self.ciudad
+        
+    def get_estado(self):
+        if self.is_active:
+            return "Activo"
+        else:
+            return "Inactivo"
 
     class Meta:
         managed = True

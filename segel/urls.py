@@ -21,5 +21,6 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app.index.urls', namespace='index')),
+    path('divipol/', include('app.divipol.urls', namespace='divipol')),
     path('configuracion/', include('app.config.urls', namespace='config')),
 ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)
