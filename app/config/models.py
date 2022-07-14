@@ -29,6 +29,9 @@ class CiudadModel(models.Model):
 
     def __str__(self):
         return self.departamento
+
+    def __str__(self):
+        return self.nombre
    
     def get_estado(self):
         if self.is_active:

@@ -1,4 +1,3 @@
-from pyexpat import model
 from django.shortcuts import render ,redirect
 from django.views.generic import *
 from app.usuario.models import *
@@ -96,6 +95,29 @@ def GetCiudad(request,pk):
         logger.error('Excepcion controlada: ' + str(ex))
         RegistrarLog(modulo , "Ha ocurrido un error de validacion",request.POST)
         return JsonResponse(response,safe=False)
+
+
+@login_required
+@require_http_methods(["GET"])
+def GetCiudadByDepartamento(request,pk):
+    model = CiudadModel
+    logger = logging.getLogger()
+    modulo = "Config/GetCiudadByDepartamento"
+    try:
+        if request.method == "GET":
+            if pk != None or pk != "":
+                ciudad = model.objects.filter(departamento=pk).exists()
+                if ciudad:
+                    ciudad = model.objects.get(departamento=pk)
+                else:
+                    RegistrarLog(modulo , "Ciudad no encontrada",request.POST)
+            else:
+                RegistrarLog(modulo , "Ha ocurrido un error de validacion",request.POST)
+            return render(request, locals())
+    except Exception as ex:
+        logger.exception('Excepcion controlada: ' + str(ex))
+        logger.error('Excepcion controlada: ' + str(ex))
+        RegistrarLog(modulo , "Ha ocurrido un error de validacion",request.POST)
 
 class UpdateCiudad(LoginRequiredMixin,SweetifySuccessMixin,UpdateView):
     login_url = '/perfil/login/'
